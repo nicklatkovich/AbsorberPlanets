@@ -26,6 +26,12 @@
           <argument>
             <kind>1</kind>
             <string>
+//Temp
+c_x1 = 0;
+c_x2 = 0;
+c_y1 = 0;
+c_y2 = 0;
+
 lvl_id = "test";
 var file_name = "lvl_" + lvl_id + ".apmap";
 var map_reader = file_text_open_read(file_name);
@@ -124,46 +130,38 @@ var mx = mouse_x;
 var my = mouse_y;
 var abs_x = mx - draw_x;
 var abs_y = my - draw_y;
+mouse_pos_x = -1;
+mouse_pos_y = -1;
 if (abs_x &gt;= 0 &amp;&amp; abs_y &gt;= 0) {
-    var x1 = (abs_x + cell_size) div cell_xstep - 1;
+    var x1 = (abs_x - cell_size + cell_xstep) div cell_xstep -1;
     var y1 = abs_y div cell_h;
-    var y2 = (abs_y - cell_half_h) div cell_h;
-    if (x1 % 2) {
+    var y2 = (abs_y + cell_half_h) div cell_h - 1;
+    if (abs(x1) %2) {
         var swap = y1;
         y1 = y2;
         y2 = swap;
     }
     var list_x = ds_list_create();
     var list_y = ds_list_create();
-    if (scr_in(x1, 0, map_w) &amp;&amp; scr_in(y1, 0, map_h)) {
-        ds_list_add(list_x, x1);
-        ds_list_add(list_y, y1);
-    }
-    if (scr_in(x1 + 1, 0, map_w) &amp;&amp; scr_in(y2, 0, map_h)) {
-        ds_list_add(list_x, x1 + 1);
-        ds_list_add(list_y, y2);
-    }
-    mouse_pos_x = -1;
-    mouse_pos_y = -1;
+    ds_list_add(list_x, x1);
+    ds_list_add(list_y, y1);
+    ds_list_add(list_x, x1 + 1);
+    ds_list_add(list_y, y2);
     if (ds_list_size(list_x) &gt; 0) {
         var x_min = ds_list_find_value(list_x, 0);
         var y_min = ds_list_find_value(list_y, 0);
-        var min_dist = point_distance(
-            1.5 * cell_size * x_min + cell_size,
-            2 * y_min * cell_half_h + ((x_min % 2) * cell_half_h) + cell_half_h,
-            abs_x, abs_y);
-        if (ds_list_size(list_x) &gt; 1) {
-            var new_x = ds_list_find_value(list_x, 1);
-            var new_y = ds_list_find_value(list_y, 1);
-            var new_dist = point_distance(
-                1.5 * cell_size * new_x + cell_size,
-                2 * new_y * cell_half_h + ((new_x % 2) * cell_half_h) + cell_half_h,
-                abs_x, abs_y);
-            if (new_dist &lt; min_dist) {
-                min_dist = new_dist;
-                x_min = new_x;
-                y_min = new_y;
-            }
+        c_x1 = 1.5 * cell_size * x_min + cell_size;
+        c_y1 = 2 * y_min * cell_half_h + ((abs(x_min) %2) * cell_half_h) + cell_half_h
+        var min_dist = point_distance(c_x1, c_y1, abs_x, abs_y);
+        var new_x = ds_list_find_value(list_x, 1);
+        var new_y = ds_list_find_value(list_y, 1);
+        c_x2 = 1.5 * cell_size * new_x + cell_size;
+        c_y2 = 2 * new_y * cell_half_h + ((abs(new_x) %2) * cell_half_h) + cell_half_h
+        var new_dist = point_distance(c_x2, c_y2, abs_x, abs_y);
+        if (new_dist &lt; min_dist) {
+            min_dist = new_dist;
+            x_min = new_x;
+            y_min = new_y;
         }
         mouse_pos_x = x_min;
         mouse_pos_y = y_min;
@@ -203,6 +201,9 @@ if (mouse_pos_x &gt;= 0 &amp;&amp; mouse_pos_y &gt;= 0 &amp;&amp; ds_grid_get(ma
     var yy = 2 * mouse_pos_y * cell_half_h + ((mouse_pos_x % 2) * cell_half_h) + cell_half_h;
     draw_sprite_ext(spr_cell, 1, xx, yy, cell_scale, cell_scale, 0, c_white, 1);
 }
+//draw_sprite_ext(spr_cell, 2, c_x1 + draw_x, c_y1 + draw_y, cell_scale, cell_scale, 0, c_white, 1);
+//draw_sprite_ext(spr_cell, 2, c_x2 + draw_x, c_y2 + draw_y, cell_scale, cell_scale, 0, c_white, 1);
+
 </string>
           </argument>
         </arguments>
