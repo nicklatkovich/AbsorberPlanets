@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>1000</depth>
+  <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -26,14 +26,71 @@
           <argument>
             <kind>1</kind>
             <string>
-dis_w = display_get_width();
-dis_h = display_get_height();
-view_wview[0] = dis_w;
-view_hview[0] = dis_h;
-view_wport[0] = dis_w;
-view_hport[0] = dis_h;
-surface_resize(application_surface, dis_w, dis_h);
-instance_create(0, 0, obj_field);
+lvl_id = "test";
+var file_name = "lvl_" + lvl_id + ".apmap";
+var map_reader = file_text_open_read(file_name);
+map_w = real(file_text_readln(map_reader));
+map_h = real(file_text_readln(map_reader));
+map = ds_grid_create(map_w, map_h);
+for (var i = 0; i &lt; map_h; i++) {
+    var str = file_text_readln(map_reader);
+    for (var j = 0; j &lt; map_w; j++) {
+        ds_grid_set(map, j, i, ord(string_char_at(str, j)) - ord('0'));
+    }
+}
+file_text_close(map_reader);
+dis_w = obj_main.dis_w;
+dis_h = obj_main.dis_h;
+abs_w = 0.5 + map_w *1.5;
+abs_h = sqrt(3) /2 * (map_h *2 +1);
+if (dis_w / dis_h &gt; abs_w / abs_h) {
+    cell_size = dis_h / abs_h;
+} else {
+    cell_size = dis_w / abs_w;
+}
+draw_x = (dis_w - cell_size * abs_w) /2;
+draw_y = (dis_h - cell_size * abs_h) /2;
+cell_half_h = cell_size *sqrt(3) /2;
+cell_half_size = cell_size /2;
+cell_scale = cell_size /128;
+surf_back = surface_create(dis_w, dis_h);
+surface_set_target(surf_back);
+for (var i = 0; i &lt; map_w; i++) {
+    for (var j = 0; j &lt; map_h; j++) {
+        if (ds_grid_get(map, i, j) == 1) {
+            draw_sprite_ext(spr_cell, 0,
+                1.5 * cell_size * i + draw_x + cell_size,
+                2 * j * cell_half_h + ((i % 2) * cell_half_h) + draw_y + cell_half_h,
+                cell_scale, cell_scale, 0, c_white, 1);
+        }
+    }
+}
+surface_reset_target();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+surface_free(surf_back);
+ds_grid_destroy(map);
 </string>
           </argument>
         </arguments>
@@ -57,7 +114,7 @@ instance_create(0, 0, obj_field);
           <argument>
             <kind>1</kind>
             <string>
-draw_sprite(spr_cell, 0, dis_w / 2, dis_h / 2);
+draw_surface(surf_back, 0, 0);
 </string>
           </argument>
         </arguments>
