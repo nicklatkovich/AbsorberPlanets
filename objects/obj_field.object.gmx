@@ -50,9 +50,15 @@ if (dis_w / dis_h &gt; abs_w / abs_h) {
 }
 draw_x = (dis_w - cell_size * abs_w) /2;
 draw_y = (dis_h - cell_size * abs_h) /2;
-cell_half_h = cell_size *sqrt(3) /2;
+cell_h = cell_size *sqrt(3);
+cell_half_h = cell_h /2;
 cell_half_size = cell_size /2;
+cell_xstep = cell_size *1.5;
 cell_scale = cell_size /128;
+
+mouse_pos_x = -1;
+mouse_pos_y = -1;
+
 surf_back = surface_create(dis_w, dis_h);
 surface_set_target(surf_back);
 for (var i = 0; i &lt; map_w; i++) {
@@ -96,6 +102,80 @@ ds_grid_destroy(map);
         </arguments>
       </action>
     </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+var mx = mouse_x;
+var my = mouse_y;
+var abs_x = mx - draw_x;
+var abs_y = my - draw_y;
+if (abs_x &gt;= 0 &amp;&amp; abs_y &gt;= 0) {
+    var x1 = (abs_x + cell_size) div cell_xstep - 1;
+    var y1 = abs_y div cell_h;
+    var y2 = (abs_y - cell_half_h) div cell_h;
+    if (x1 % 2) {
+        var swap = y1;
+        y1 = y2;
+        y2 = swap;
+    }
+    var list_x = ds_list_create();
+    var list_y = ds_list_create();
+    if (scr_in(x1, 0, map_w) &amp;&amp; scr_in(y1, 0, map_h)) {
+        ds_list_add(list_x, x1);
+        ds_list_add(list_y, y1);
+    }
+    if (scr_in(x1 + 1, 0, map_w) &amp;&amp; scr_in(y2, 0, map_h)) {
+        ds_list_add(list_x, x1 + 1);
+        ds_list_add(list_y, y2);
+    }
+    mouse_pos_x = -1;
+    mouse_pos_y = -1;
+    if (ds_list_size(list_x) &gt; 0) {
+        var x_min = ds_list_find_value(list_x, 0);
+        var y_min = ds_list_find_value(list_y, 0);
+        var min_dist = point_distance(
+            1.5 * cell_size * x_min + cell_size,
+            2 * y_min * cell_half_h + ((x_min % 2) * cell_half_h) + cell_half_h,
+            abs_x, abs_y);
+        if (ds_list_size(list_x) &gt; 1) {
+            var new_x = ds_list_find_value(list_x, 1);
+            var new_y = ds_list_find_value(list_y, 1);
+            var new_dist = point_distance(
+                1.5 * cell_size * new_x + cell_size,
+                2 * new_y * cell_half_h + ((new_x % 2) * cell_half_h) + cell_half_h,
+                abs_x, abs_y);
+            if (new_dist &lt; min_dist) {
+                min_dist = new_dist;
+                x_min = new_x;
+                y_min = new_y;
+            }
+        }
+        mouse_pos_x = x_min;
+        mouse_pos_y = y_min;
+    }
+    ds_list_destroy(list_x);
+    ds_list_destroy(list_y);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -115,6 +195,14 @@ ds_grid_destroy(map);
             <kind>1</kind>
             <string>
 draw_surface(surf_back, 0, 0);
+draw_set_color(c_white);
+draw_text(0, 0, mouse_pos_x);
+draw_text(0, 64, mouse_pos_y);
+if (mouse_pos_x &gt;= 0 &amp;&amp; mouse_pos_y &gt;= 0 &amp;&amp; ds_grid_get(map, mouse_pos_x, mouse_pos_y)) {
+    var xx = 1.5 * cell_size * mouse_pos_x + cell_size + draw_x;
+    var yy = 2 * mouse_pos_y * cell_half_h + ((mouse_pos_x % 2) * cell_half_h) + cell_half_h;
+    draw_sprite_ext(spr_cell, 1, xx, yy, cell_scale, cell_scale, 0, c_white, 1);
+}
 </string>
           </argument>
         </arguments>
