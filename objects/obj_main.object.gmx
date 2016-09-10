@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>
+randomize();
 is_debug = true;
 enum states {
     main,
@@ -33,17 +34,17 @@ enum states {
     loader
 }
 
-//dis_w = display_get_width();
-//dis_h = display_get_height();
-dis_w = room_width;
-dis_h = room_height;
-/*
+dis_w = display_get_width();
+dis_h = display_get_height();
+//dis_w = room_width;
+//dis_h = room_height;
+
 view_wview[0] = dis_w;
 view_hview[0] = dis_h;
 view_wport[0] = dis_w;
 view_hport[0] = dis_h;
-*/
-//surface_resize(application_surface, dis_w, dis_h);
+
+surface_resize(application_surface, dis_w, dis_h);
 fps_r = string(room_speed);
 alarm[0] = 30;
 state = states.main;
