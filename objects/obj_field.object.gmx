@@ -26,22 +26,30 @@
           <argument>
             <kind>1</kind>
             <string>
-is_editor = global.is_editor;
-/*
-lvl_id = "test";
-var file_name = "lvl_" + lvl_id + ".apmap";
-var map_reader = file_text_open_read(file_name);
-*/
-map_w = 20;//real(file_text_readln(map_reader));
-map_h = 10;//real(file_text_readln(map_reader));
-map = ds_grid_create(map_w, map_h);
-for (var i = 0; i &lt; map_h; i++) {
-    //var str = file_text_readln(map_reader);
-    for (var j = 0; j &lt; map_w; j++) {
-        ds_grid_set(map, j, i, 0);//ord(string_char_at(str, j)) - ord('0'));
+map_w = 20;
+map_h = 10;
+
+if (obj_main.state == states.loader) {
+    var file_name = get_open_filename("AP map|*.apmap", "");
+    var file = file_text_open_read(file_name);
+    map_w = real(file_text_readln(file));
+    map_h = real(file_text_readln(file));
+    map = ds_grid_create(map_w, map_h);
+    for (var i = 0; i &lt; map_h; i++) {
+        var str = file_text_readln(file);
+        for (var j = 0; j &lt; map_w; j++) {
+            ds_grid_set(map, j, i, ord(string_char_at(str, j + 1)) - ord('0'));
+        }
+    }
+    file_text_close(file);
+} else {
+    map = ds_grid_create(map_w, map_h);
+    for (var i = 0; i &lt; map_h; i++) {
+        for (var j = 0; j &lt; map_w; j++) {
+            ds_grid_set(map, j, i, 0);
+        }
     }
 }
-//file_text_close(map_reader);
 dis_w = obj_main.dis_w;
 dis_h = obj_main.dis_h;
 abs_w = 0.5 + map_w *1.5;

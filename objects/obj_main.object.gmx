@@ -29,7 +29,8 @@
 is_debug = true;
 enum states {
     main,
-    editor
+    editor,
+    loader
 }
 
 //dis_w = display_get_width();
@@ -110,7 +111,6 @@ if (keyboard_check_pressed(vk_escape)) {
 
 if (is_debug) {
     if (keyboard_check_pressed(ord('E')) &amp;&amp; keyboard_check(ord('A')) &amp;&amp; !instance_exists(obj_field)) {
-        global.is_editor = true;
         instance_create(0, 0, obj_field);
         state = states.editor;
     }
@@ -121,15 +121,19 @@ if (is_debug) {
         file_text_writeln(file_writer);
         file_text_write_string(file_writer, string(obj_field.map_h));
         file_text_writeln(file_writer);
-        for (var i = 0; i &lt; obj_field.map_w; i++) {
+        for (var i = 0; i &lt; obj_field.map_h; i++) {
             var str = "";
-            for (var j = 0; j &lt; obj_field.map_h; j++) {
-                str += string(ds_grid_get(obj_field.map, i, j));
+            for (var j = 0; j &lt; obj_field.map_w; j++) {
+                str += string(ds_grid_get(obj_field.map, j, i));
             }
             file_text_write_string(file_writer, str);
             file_text_writeln(file_writer);
         }
         file_text_close(file_writer);
+    }
+    if (keyboard_check_pressed(ord('O')) &amp;&amp; keyboard_check(vk_lcontrol) &amp;&amp; state == states.main) {
+        state = states.loader;
+        instance_create(0, 0, obj_field);
     }
 }
 </string>
