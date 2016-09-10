@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>
+is_editor = global.is_editor;
 /*
 lvl_id = "test";
 var file_name = "lvl_" + lvl_id + ".apmap";
@@ -195,7 +196,7 @@ draw_surface(surf_back, 0, 0);
 draw_set_color(c_white);
 if (mouse_pos_x &gt;= 0 &amp;&amp; mouse_pos_y &gt;= 0) {
     var xx = 1.5 * cell_size * mouse_pos_x + cell_size + draw_x;
-    var yy = 2 * mouse_pos_y * cell_half_h + ((mouse_pos_x % 2) * cell_half_h) + cell_half_h;
+    var yy = 2 * mouse_pos_y * cell_half_h + ((mouse_pos_x % 2) * cell_half_h) + cell_half_h + draw_y;
     draw_sprite_ext(spr_cell, 1, xx, yy, cell_scale, cell_scale, 0, c_white, 0.5);
 }
 //draw_sprite_ext(spr_cell, 2, c_x1 + draw_x, c_y1 + draw_y, cell_scale, cell_scale, 0, c_white, 1);
