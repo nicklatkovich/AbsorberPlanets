@@ -207,9 +207,14 @@ if (abs_x &gt;= 0 &amp;&amp; abs_y &gt;= 0) {
             }
         }
         if (mouse_check_button_pressed(mb_right) || (mouse_check_button(mb_right) &amp;&amp; (mouse_prev_pos_x != mouse_pos_x || mouse_prev_pos_y != mouse_pos_y))) {
-            ds_grid_set(map, mouse_pos_x, mouse_pos_y, 0);
-            ds_grid_set(ices, mouse_pos_x, mouse_pos_y, 0);
-            scr_draw_field();
+            if (state == 0) {
+                ds_grid_set(map, mouse_pos_x, mouse_pos_y, 0);
+                ds_grid_set(ices, mouse_pos_x, mouse_pos_y, 0);
+                scr_draw_field();
+            } else if (state == 1) {
+                ds_grid_set(ices, mouse_pos_x, mouse_pos_y, 0);
+                scr_draw_field();
+            }
         }
     }
 }
