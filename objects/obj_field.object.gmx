@@ -83,6 +83,8 @@ for (var i = 0; i &lt; map_w; i++) {
                 2 * j * cell_half_h + ((i % 2) * cell_half_h) + draw_y + cell_half_h,
                 obj_planet);
             ds_grid_set(planets, i, j, new_planet);
+        } else {
+            ds_grid_set(planets, i, j, -1);
         }
     }
 }
@@ -114,7 +116,7 @@ scr_draw_field();
 surface_free(surf_back);
 for (var i = 0; i &lt; map_w; i++) {
     for (var j = 0; j &lt; map_h; j++) {
-        if (ds_grid_get(map, i, j) == 1) {
+        if (ds_grid_get(planets, i, j) &gt;= 0) {
             with (ds_grid_get(planets, i, j)) {
                 instance_destroy();
             }
