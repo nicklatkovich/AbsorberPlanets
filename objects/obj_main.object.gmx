@@ -171,7 +171,7 @@ if (is_debug) {
             <kind>1</kind>
             <string>
 draw_set_color(c_white);
-draw_text(0, 0, "FPS = " + fps_r);
+//draw_text(0, 0, "FPS = " + fps_r);
 </string>
           </argument>
         </arguments>
