@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>
+randomize();
 dis_w = display_get_width();
 dis_h = display_get_height();
 surface_resize(application_surface, dis_w, dis_h);

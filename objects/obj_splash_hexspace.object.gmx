@@ -34,8 +34,8 @@ view_hview[0] = dis_h;
 view_wport[0] = dis_w;
 view_hport[0] = dis_h;
 
-var spr_w = sprite_get_width(spr_splash_developer);
-var spr_h = sprite_get_height(spr_splash_developer);
+var spr_w = sprite_get_width(spr_splash_hexspace);
+var spr_h = sprite_get_height(spr_splash_hexspace);
 if (dis_w / dis_h &gt; spr_w / spr_h) {
     scale = dis_w / spr_w;
 } else {
@@ -72,7 +72,7 @@ dir++;
 if (dir &lt;= 90) {
     obj_appsurf.alpha = -lengthdir_y(1, dir);
 } else {
-    room_goto(room_splash_hexspace);
+    room_goto(room_game);
 }
 </string>
           </argument>
@@ -97,7 +97,8 @@ if (dir &lt;= 90) {
           <argument>
             <kind>1</kind>
             <string>
-draw_sprite_ext(spr_splash_developer, 0, xx, yy, scale, scale, 0, c_white, 1);
+draw_sprite_ext(spr_splash_hexspace, 0, xx, yy, scale, scale, 0, c_white, 1);
+
 </string>
           </argument>
         </arguments>

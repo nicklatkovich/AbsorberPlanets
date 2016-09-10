@@ -20,6 +20,6 @@
   <width>1366</width>
   <height>768</height>
   <frames>
-    <frame index="0">images\spr_splash_game_0.png</frame>
+    <frame index="0">images\spr_splash_hexspace_0.png</frame>
   </frames>
 </sprite>
