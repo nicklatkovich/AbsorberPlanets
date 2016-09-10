@@ -72,7 +72,10 @@ dir++;
 if (dir &lt;= 90) {
     obj_appsurf.alpha = -lengthdir_y(1, dir);
 } else {
-    room_goto(room_game);
+    obj_appsurf.alpha = 1;
+    if (keyboard_check(vk_anykey)) {
+        room_goto(room_game);
+    }
 }
 </string>
           </argument>
