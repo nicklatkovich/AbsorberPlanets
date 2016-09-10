@@ -35,6 +35,8 @@
       <sprite>sprites\spr_splash_blue</sprite>
       <sprite>sprites\spr_splash_more_blue</sprite>
       <sprite>sprites\spr_splash_red</sprite>
+      <sprite>sprites\spr_splash_text</sprite>
+      <sprite>sprites\spr_splash_text_2</sprite>
     </sprites>
     <sprite>sprites\spr_cell</sprite>
     <sprite>sprites\spr_cell_base</sprite>
