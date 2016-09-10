@@ -112,6 +112,15 @@ scr_draw_field();
             <kind>1</kind>
             <string>
 surface_free(surf_back);
+for (var i = 0; i &lt; map_w; i++) {
+    for (var j = 0; j &lt; map_h; j++) {
+        if (ds_grid_get(map, i, j) == 1) {
+            with (ds_grid_get(planets, i, j)) {
+                instance_destroy();
+            }
+        }
+    }
+}
 ds_grid_destroy(map);
 ds_grid_destroy(planets);
 </string>
