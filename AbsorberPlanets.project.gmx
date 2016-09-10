@@ -26,11 +26,13 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\spr_cell</sprite>
+    <sprite>sprites\spr_cell_base</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\scr_in.gml</script>
+    <script>scripts\scr_draw_field.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_main</object>

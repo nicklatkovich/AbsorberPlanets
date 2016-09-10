@@ -26,25 +26,21 @@
           <argument>
             <kind>1</kind>
             <string>
-//Temp
-c_x1 = 0;
-c_x2 = 0;
-c_y1 = 0;
-c_y2 = 0;
-
+/*
 lvl_id = "test";
 var file_name = "lvl_" + lvl_id + ".apmap";
 var map_reader = file_text_open_read(file_name);
-map_w = real(file_text_readln(map_reader));
-map_h = real(file_text_readln(map_reader));
+*/
+map_w = 20;//real(file_text_readln(map_reader));
+map_h = 10;//real(file_text_readln(map_reader));
 map = ds_grid_create(map_w, map_h);
 for (var i = 0; i &lt; map_h; i++) {
-    var str = file_text_readln(map_reader);
+    //var str = file_text_readln(map_reader);
     for (var j = 0; j &lt; map_w; j++) {
-        ds_grid_set(map, j, i, ord(string_char_at(str, j)) - ord('0'));
+        ds_grid_set(map, j, i, 0);//ord(string_char_at(str, j)) - ord('0'));
     }
 }
-file_text_close(map_reader);
+//file_text_close(map_reader);
 dis_w = obj_main.dis_w;
 dis_h = obj_main.dis_h;
 abs_w = 0.5 + map_w *1.5;
@@ -66,18 +62,7 @@ mouse_pos_x = -1;
 mouse_pos_y = -1;
 
 surf_back = surface_create(dis_w, dis_h);
-surface_set_target(surf_back);
-for (var i = 0; i &lt; map_w; i++) {
-    for (var j = 0; j &lt; map_h; j++) {
-        if (ds_grid_get(map, i, j) == 1) {
-            draw_sprite_ext(spr_cell, 0,
-                1.5 * cell_size * i + draw_x + cell_size,
-                2 * j * cell_half_h + ((i % 2) * cell_half_h) + draw_y + cell_half_h,
-                cell_scale, cell_scale, 0, c_white, 1);
-        }
-    }
-}
-surface_reset_target();
+scr_draw_field();
 </string>
           </argument>
         </arguments>
@@ -130,6 +115,8 @@ var mx = mouse_x;
 var my = mouse_y;
 var abs_x = mx - draw_x;
 var abs_y = my - draw_y;
+mouse_prev_pos_x = mouse_pos_x;
+mouse_prev_pos_y = mouse_pos_y;
 mouse_pos_x = -1;
 mouse_pos_y = -1;
 if (abs_x &gt;= 0 &amp;&amp; abs_y &gt;= 0) {
@@ -168,7 +155,18 @@ if (abs_x &gt;= 0 &amp;&amp; abs_y &gt;= 0) {
     }
     ds_list_destroy(list_x);
     ds_list_destroy(list_y);
+    if (scr_in(mouse_pos_x, 0, map_w) &amp;&amp; scr_in(mouse_pos_y, 0, map_h)) {
+        if (mouse_check_button_pressed(mb_left) || (mouse_check_button(mb_left) &amp;&amp; (mouse_prev_pos_x != mouse_pos_x || mouse_prev_pos_y != mouse_pos_y))) {
+            ds_grid_set(map, mouse_pos_x, mouse_pos_y, 1);
+            scr_draw_field();
+        }
+        if (mouse_check_button_pressed(mb_right) || (mouse_check_button(mb_right) &amp;&amp; (mouse_prev_pos_x != mouse_pos_x || mouse_prev_pos_y != mouse_pos_y))) {
+            ds_grid_set(map, mouse_pos_x, mouse_pos_y, 0);
+            scr_draw_field();
+        }
+    }
 }
+
 </string>
           </argument>
         </arguments>
@@ -193,13 +191,12 @@ if (abs_x &gt;= 0 &amp;&amp; abs_y &gt;= 0) {
             <kind>1</kind>
             <string>
 draw_surface(surf_back, 0, 0);
+
 draw_set_color(c_white);
-draw_text(0, 0, mouse_pos_x);
-draw_text(0, 64, mouse_pos_y);
-if (mouse_pos_x &gt;= 0 &amp;&amp; mouse_pos_y &gt;= 0 &amp;&amp; ds_grid_get(map, mouse_pos_x, mouse_pos_y)) {
+if (mouse_pos_x &gt;= 0 &amp;&amp; mouse_pos_y &gt;= 0) {
     var xx = 1.5 * cell_size * mouse_pos_x + cell_size + draw_x;
     var yy = 2 * mouse_pos_y * cell_half_h + ((mouse_pos_x % 2) * cell_half_h) + cell_half_h;
-    draw_sprite_ext(spr_cell, 1, xx, yy, cell_scale, cell_scale, 0, c_white, 1);
+    draw_sprite_ext(spr_cell, 1, xx, yy, cell_scale, cell_scale, 0, c_white, 0.5);
 }
 //draw_sprite_ext(spr_cell, 2, c_x1 + draw_x, c_y1 + draw_y, cell_scale, cell_scale, 0, c_white, 1);
 //draw_sprite_ext(spr_cell, 2, c_x2 + draw_x, c_y2 + draw_y, cell_scale, cell_scale, 0, c_white, 1);
