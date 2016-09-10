@@ -32,6 +32,7 @@
     <sprite>sprites\spr_ice</sprite>
     <sprite>sprites\spr_planet</sprite>
     <sprite>sprites\spr_planet_base</sprite>
+    <sprite>sprites\spr_splash_developer</sprite>
     <sprite>sprites\spr_splash_game</sprite>
   </sprites>
   <backgrounds name="background">
@@ -50,9 +51,10 @@
     <object>objects\obj_planet</object>
     <object>objects\obj_galaxy1</object>
     <object>objects\obj_appsurf</object>
+    <object>objects\obj_splash_developer</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\room_start</room>
+    <room>rooms\room_splash_developers</room>
     <room>rooms\room_game</room>
   </rooms>
   <help>

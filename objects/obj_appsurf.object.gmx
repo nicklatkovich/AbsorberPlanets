@@ -26,9 +26,11 @@
           <argument>
             <kind>1</kind>
             <string>
+dis_w = display_get_width();
+dis_h = display_get_height();
+surface_resize(application_surface, dis_w, dis_h);
 application_surface_draw_enable(false);
-alpha = 0.3;
-room_goto(room_game);
+alpha = 0;
 </string>
           </argument>
         </arguments>
