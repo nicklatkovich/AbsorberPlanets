@@ -29,6 +29,8 @@
 map_w = 20;
 map_h = 10;
 
+state = 0;
+
 if (obj_main.state == states.loader) {
     var file_name = get_open_filename("AP map|*.apmap", "");
     var file = file_text_open_read(file_name);
@@ -74,9 +76,11 @@ mouse_pos_y = -1;
 surf_back = surface_create(dis_w, dis_h);
 
 planets = ds_grid_create(map_w, map_h);
+ices = ds_grid_create(map_w, map_h);
 
 for (var i = 0; i &lt; map_w; i++) {
     for (var j = 0; j &lt; map_h; j++) {
+        ds_grid_set(ices, i, j, 0);
         if (ds_grid_get(map, i, j) == 1) {
             var new_planet = instance_create(
                 1.5 * cell_size * i + draw_x + cell_size,
@@ -194,12 +198,28 @@ if (abs_x &gt;= 0 &amp;&amp; abs_y &gt;= 0) {
     ds_list_destroy(list_y);
     if (scr_in(mouse_pos_x, 0, map_w) &amp;&amp; scr_in(mouse_pos_y, 0, map_h)) {
         if (mouse_check_button_pressed(mb_left) || (mouse_check_button(mb_left) &amp;&amp; (mouse_prev_pos_x != mouse_pos_x || mouse_prev_pos_y != mouse_pos_y))) {
-            ds_grid_set(map, mouse_pos_x, mouse_pos_y, 1);
-            scr_draw_field();
+            if (state == 0) {
+                ds_grid_set(map, mouse_pos_x, mouse_pos_y, 1);
+                scr_draw_field();
+            } else if (state == 1 &amp;&amp; ds_grid_get(map, mouse_pos_x, mouse_pos_y) == 1) {
+                ds_grid_set(ices, mouse_pos_x, mouse_pos_y, (ds_grid_get(ices, mouse_pos_x, mouse_pos_y) +1) %3);
+                scr_draw_field();
+            }
         }
         if (mouse_check_button_pressed(mb_right) || (mouse_check_button(mb_right) &amp;&amp; (mouse_prev_pos_x != mouse_pos_x || mouse_prev_pos_y != mouse_pos_y))) {
             ds_grid_set(map, mouse_pos_x, mouse_pos_y, 0);
+            ds_grid_set(ices, mouse_pos_x, mouse_pos_y, 0);
             scr_draw_field();
+        }
+    }
+}
+
+if (obj_main.state = states.editor) {
+    if (keyboard_check_pressed(ord('1'))) {
+        if (state == 1) {
+            state = 0;
+        } else {
+            state = 1;
         }
     }
 }
@@ -230,10 +250,22 @@ if (abs_x &gt;= 0 &amp;&amp; abs_y &gt;= 0) {
 draw_surface(surf_back, 0, 0);
 
 draw_set_color(c_white);
-if (mouse_pos_x &gt;= 0 &amp;&amp; mouse_pos_y &gt;= 0) {
+if (mouse_pos_x &gt;= 0 &amp;&amp; mouse_pos_y &gt;= 0 &amp;&amp; mouse_pos_x &lt; map_w &amp;&amp; mouse_pos_y &lt; map_h) {
     var xx = 1.5 * cell_size * mouse_pos_x + cell_size + draw_x;
     var yy = 2 * mouse_pos_y * cell_half_h + ((mouse_pos_x % 2) * cell_half_h) + cell_half_h + draw_y;
+    if (obj_main.state = states.editor) {
+        switch (state) {
+            case 0:
+                draw_sprite_ext(spr_cell, 1, mean(mouse_x, xx), mean(mouse_y, yy), cell_scale, cell_scale, 0, c_white, 0.3); 
+                break;
+            case 1:
+                draw_sprite_ext(spr_ice, 1, mean(mouse_x, xx), mean(mouse_y, yy), cell_scale, cell_scale, 0, c_white, 0.3); 
+                break;
+        }
+    }
+/*
     draw_sprite_ext(spr_cell, 1, xx, yy, cell_scale, cell_scale, 0, c_white, 0.5);
+*/
 }
 //draw_sprite_ext(spr_cell, 2, c_x1 + draw_x, c_y1 + draw_y, cell_scale, cell_scale, 0, c_white, 1);
 //draw_sprite_ext(spr_cell, 2, c_x2 + draw_x, c_y2 + draw_y, cell_scale, cell_scale, 0, c_white, 1);

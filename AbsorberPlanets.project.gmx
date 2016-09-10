@@ -30,6 +30,8 @@
     <sprite>sprites\spr_planet</sprite>
     <sprite>sprites\spr_planet_base</sprite>
     <sprite>sprites\spr_galaxy</sprite>
+    <sprite>sprites\spr_ice</sprite>
+    <sprite>sprites\spr_destr_ice</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
