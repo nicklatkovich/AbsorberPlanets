@@ -31,7 +31,8 @@ is_debug = true;
 enum states {
     main,
     editor,
-    loader
+    loader,
+    play
 }
 
 dis_w = display_get_width();

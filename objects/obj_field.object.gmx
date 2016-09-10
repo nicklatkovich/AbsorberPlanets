@@ -81,7 +81,7 @@ ices = ds_grid_create(map_w, map_h);
 for (var i = 0; i &lt; map_w; i++) {
     for (var j = 0; j &lt; map_h; j++) {
         ds_grid_set(ices, i, j, 0);
-        if (ds_grid_get(map, i, j) == 1) {
+        if (obj_main.state == states.play &amp;&amp; ds_grid_get(map, i, j) == 1) {
             var new_planet = instance_create(
                 1.5 * cell_size * i + draw_x + cell_size,
                 2 * j * cell_half_h + ((i % 2) * cell_half_h) + draw_y + cell_half_h,
