@@ -192,6 +192,7 @@ if (is_debug) {
           <argument>
             <kind>1</kind>
             <string>
+/*
 draw_set_color(c_white);
 draw_set_font(font_e4_24);
 draw_set_halign(fa_left);
@@ -199,7 +200,7 @@ draw_set_valign(fa_top);
 draw_text(0, 0, "FPS = " + fps_r);
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
-
+*/
 
 </string>
           </argument>
