@@ -94,6 +94,7 @@
     <object>objects\obj_splash_developer</object>
     <object>objects\obj_splash_hexspace</object>
     <object>objects\obj_planet_panel</object>
+    <object>objects\obj_dialog</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room_splash_developers</room>

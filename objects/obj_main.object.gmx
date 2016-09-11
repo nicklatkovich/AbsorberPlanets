@@ -39,7 +39,8 @@ enum states {
     brief,
     editor,
     loader,
-    play
+    play,
+    dialog
 }
 
 dis_w = obj_appsurf.dis_w;
@@ -58,7 +59,9 @@ galaxies_scale = min(dis_w /1920, dis_h /1080);
 
 fps_r = string(room_speed);
 alarm[0] = 30;
-state = states.main;
+state = states.dialog;
+
+instance_create(0, 0, obj_dialog);
 
 create_galaxies();
 
