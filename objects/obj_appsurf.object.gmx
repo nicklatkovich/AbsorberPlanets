@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>
+energy = 0;
 randomize();
 dis_w = display_get_width();
 dis_h = display_get_height();
