@@ -74,8 +74,10 @@ angle_diff = 5;
           <argument>
             <kind>1</kind>
             <string>
+// !!! 32 -- radious of level_button
+var dist = -32 / lengthdir_y(1, 90 / lvl_num);
+
 for (var i = 0; i &lt; lvl_num; i++) {
-    var dist = point_distance(x, y, obj_main.dis_w /2, obj_main.dis_h /2);
     var dir = dir_center + 90 + 180 * ((i + 0.5) / lvl_num);
     instance_create(
         obj_main.dis_w /2 + lengthdir_x(dist, dir),
