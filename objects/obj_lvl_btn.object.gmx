@@ -113,17 +113,17 @@ if (is_in_move) {
         draw_sprite_ext(spr_lvl_btn, 0,
             x + ldx * (x_out - x),
             y + ldx * (y_out - y),
-            image_xscale, image_yscale, 0, c_white, 1);
+            image_xscale, image_yscale, 0, color, 1);
     } else {
         draw_sprite_ext(spr_lvl_btn, 0,
             x_out - ldx * (x_out - x),
             y_out - ldx * (y_out - y),
-            image_xscale, image_yscale, 0, c_white, 1);
+            image_xscale, image_yscale, 0, color, 1);
     }
 } else if (move_target == moveTarget.in) {
-    draw_sprite_ext(spr_lvl_btn, 0, x, y, image_xscale, image_yscale, 0, c_white, 1);
+    draw_sprite_ext(spr_lvl_btn, 0, x, y, image_xscale, image_yscale, 0, color, 1);
 } else {
-    draw_sprite_ext(spr_lvl_btn, 0, x_out, y_out, image_xscale, image_yscale, 0, c_white, 1);
+    draw_sprite_ext(spr_lvl_btn, 0, x_out, y_out, image_xscale, image_yscale, 0, color, 1);
 }
 </string>
           </argument>
