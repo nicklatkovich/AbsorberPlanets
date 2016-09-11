@@ -33,7 +33,8 @@ mouse_pos_x = -1;
 mouse_pos_y = -1;
 
 surf_back = surface_create(dis_w, dis_h);
-
+map_w = 20;
+map_h = 10;
 
 </string>
           </argument>
@@ -139,22 +140,26 @@ if (abs_x &gt;= 0 &amp;&amp; abs_y &gt;= 0) {
     ds_list_destroy(list_y);
     if (scr_in(mouse_pos_x, 0, map_w) &amp;&amp; scr_in(mouse_pos_y, 0, map_h)) {
         if (mouse_check_button_pressed(mb_left) || (mouse_check_button(mb_left) &amp;&amp; (mouse_prev_pos_x != mouse_pos_x || mouse_prev_pos_y != mouse_pos_y))) {
-            if (state == 0) {
-                ds_grid_set(map, mouse_pos_x, mouse_pos_y, 1);
-                scr_draw_field();
-            } else if (state == 1 &amp;&amp; ds_grid_get(map, mouse_pos_x, mouse_pos_y) == 1) {
-                ds_grid_set(ices, mouse_pos_x, mouse_pos_y, (ds_grid_get(ices, mouse_pos_x, mouse_pos_y) +1) %3);
-                scr_draw_field();
+            if (obj_main.state == states.editor) {
+                if (state == 0) {
+                    ds_grid_set(map, mouse_pos_x, mouse_pos_y, 1);
+                    scr_draw_field();
+                } else if (state == 1 &amp;&amp; ds_grid_get(map, mouse_pos_x, mouse_pos_y) == 1) {
+                    ds_grid_set(ices, mouse_pos_x, mouse_pos_y, (ds_grid_get(ices, mouse_pos_x, mouse_pos_y) +1) %3);
+                    scr_draw_field();
+                }
             }
         }
         if (mouse_check_button_pressed(mb_right) || (mouse_check_button(mb_right) &amp;&amp; (mouse_prev_pos_x != mouse_pos_x || mouse_prev_pos_y != mouse_pos_y))) {
-            if (state == 0) {
-                ds_grid_set(map, mouse_pos_x, mouse_pos_y, 0);
-                ds_grid_set(ices, mouse_pos_x, mouse_pos_y, 0);
-                scr_draw_field();
-            } else if (state == 1) {
-                ds_grid_set(ices, mouse_pos_x, mouse_pos_y, 0);
-                scr_draw_field();
+            if (obj_main.state == states.editor) {
+                if (state == 0) {
+                    ds_grid_set(map, mouse_pos_x, mouse_pos_y, 0);
+                    ds_grid_set(ices, mouse_pos_x, mouse_pos_y, 0);
+                    scr_draw_field();
+                } else if (state == 1) {
+                    ds_grid_set(ices, mouse_pos_x, mouse_pos_y, 0);
+                    scr_draw_field();
+                }
             }
         }
     }
@@ -210,6 +215,24 @@ if (obj_main.state == states.loader) {
     file_text_close(file);
 }
 */
+if (obj_main.state = states.editor) {
+    if (instance_exists(obj_apmap)) {
+        with (obj_apmap) {
+            instance_destroy();
+        }
+    }
+    apmap = instance_create(0, 0, obj_apmap);
+    apmap.map_w = map_w;
+    apmap.map_h = map_h;
+    apmap.field = ds_grid_create(map_w, map_h);
+//    apmap.ices = ds_grid_create(map_w, map_h);
+    for (var i = 0; i &lt; map_w; i++) {
+        for (var j = 0; j &lt; map_h; j++) {
+            ds_grid_set(apmap.field, i, j, 0);
+//            ds_grid_set(ices, i, j, 0);
+        }
+    }
+}
 
 map_w = apmap.map_w;
 map_h = apmap.map_h;

@@ -132,8 +132,10 @@ if (keyboard_check_pressed(vk_escape)) {
 
 if (is_debug) {
     if (keyboard_check_pressed(ord('E')) &amp;&amp; keyboard_check(ord('A')) &amp;&amp; !instance_exists(obj_field)) {
-        instance_create(0, 0, obj_field);
         state = states.editor;
+        with (instance_create(0, 0, obj_field)) {
+            event_user(0);
+        }
         destroy_galaxies();
     }
     if (keyboard_check_pressed(ord('S')) &amp;&amp; keyboard_check(vk_lcontrol) &amp;&amp; state == states.editor) {
