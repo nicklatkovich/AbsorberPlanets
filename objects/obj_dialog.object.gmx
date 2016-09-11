@@ -26,11 +26,57 @@
           <argument>
             <kind>1</kind>
             <string>
+obj_appsurf.alpha = 0.8;
+
 dis_w = obj_main.dis_w;
 dis_h = obj_main.dis_h;
 
 dir_label_x = 0;
 dir_label_spd = 2;
+
+dir_off_y = 0;
+dir_off_spd = 0;
+
+spr_h = sprite_get_height(spr_sci);
+
+label_id = 0;
+labels_num = 6;
+label[0] = 
+"Здравствуй. Как хорошо, что вы поспешили к#нам, не остались равнодушными к нашей просьбе";
+label[1] = 
+"Наверное, вы слышали об одном открытии,#которое произошло полгода назад";
+label[2] = 
+"Наша лаборатория занималась изучением червоточины, которая расположена#в секторе Е23. Но это оказался разлом границы между параллельными мирами";
+label[3] = 
+"Мы не остановились на этом и продолжили изучение";
+label[4] = 
+"А вчера мы поняли, что тела из параллельного мира#переходят в наш. Уже нарушился баланс между мирами";
+label[5] =
+"Ожидается еще больший наплыв. Чтобы избежать коллапсирования нашей#вселенной, необходимо уничтожать планеты из параллельного мира";
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+obj_appsurf.alpha = 0.3;
 
 </string>
           </argument>
@@ -61,6 +107,23 @@ if (dir_label_x &gt; 180) {
     dir_label_spd = 0;
 }
 
+dir_off_y += dir_off_spd;
+if (dir_off_y &gt; 180) {
+    instance_destroy();
+}
+
+if (mouse_check_button_pressed(mb_left)) {
+    if (label_id &lt; labels_num) {
+        label_id++;
+        dir_label_x = 0;
+        dir_label_spd = 2;
+        if (label_id == labels_num) {
+            dir_off_spd = 2;
+            obj_main.state = states.main;
+        }
+    }
+}
+
 </string>
           </argument>
         </arguments>
@@ -84,14 +147,16 @@ if (dir_label_x &gt; 180) {
           <argument>
             <kind>1</kind>
             <string>
+var yy = (1 - (lengthdir_x(1, dir_off_y) +1) /2) * spr_h;
+
 draw_set_color(c_white);
-draw_rectangle(0, dis_h *7/8, dis_w, dis_h, false);
-draw_sprite(spr_sci, 0, dis_w /8, dis_h);
+draw_rectangle(0, yy + dis_h *7/8, dis_w, yy + dis_h, false);
+draw_sprite(spr_sci, 0, dis_w /8, yy + dis_h);
 draw_set_color(make_color_rgb(39, 44, 63));
 draw_set_font(font_e4_24);
-draw_text(dis_w /2 + dis_w /8 + (lengthdir_x(1, dir_label_x) +1) /2 * dis_w, dis_h * 15/16,
-"Здравствуй. Как хорошо, что вы поспешили к#нам, не остались равнодушными к нашей просьбе."
-);
+if (label_id &lt; labels_num) {
+    draw_text(dis_w /2 + dis_w /8 + (lengthdir_x(1, dir_label_x) +1) /2 * dis_w, yy + dis_h * 15/16, label[label_id]);
+}
 
 </string>
           </argument>

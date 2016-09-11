@@ -211,63 +211,21 @@ is_under_mouse = true;
           <argument>
             <kind>1</kind>
             <string>
-if (!is_in_move &amp;&amp; move_target == moveTarget.in) {
-    if (obj_main.is_lvl_sel) {
-        var need = true;
-        with (obj_galaxy) {
-            if (is_in_move) {
-                need = false;
-                break;
-            }
-        }
-        if (need) {
-            with (obj_lvl_btn) {
+if (obj_main.state == states.main) {
+    if (!is_in_move &amp;&amp; move_target == moveTarget.in) {
+        if (obj_main.is_lvl_sel) {
+            var need = true;
+            with (obj_galaxy) {
                 if (is_in_move) {
-                    if (move_target == moveTarget.in) {
-                        move_back = true;
-                    }
-                } else {
-                    if (move_target == moveTarget.in) {
-                        is_in_move = true;
-                        move_target = moveTarget.out;
-                    }
+                    need = false;
+                    break;
                 }
             }
-            obj_main.is_lvl_sel = false;
-            obj_main.lvl_sel_id = index;
-            with (obj_galaxy) {
-                if (index != obj_main.lvl_sel_id) {
-                    if (is_in_move) {
-                        if (move_target == moveTarget.out) {
-                            move_back = true;
-                        }
-                    } else {
-                        if (move_target == moveTarget.out) {
-                            is_in_move = true;
-                            move_target = moveTarget.in;
-                        }
-                    }
-                }
-            }
-        }
-    } else {
-        var need = true;
-        with (obj_galaxy) {
-            if (is_in_move) {
-                need = false;
-                break;
-            }
-        }
-        if (need) {
-            obj_main.is_lvl_sel = true;
-            obj_main.lvl_sel_id = index;
-            lvl_sel_id = index;
-            with (obj_galaxy) {
-                if (index != obj_main.lvl_sel_id) {
+            if (need) {
+                with (obj_lvl_btn) {
                     if (is_in_move) {
                         if (move_target == moveTarget.in) {
                             move_back = true;
-                        } else {
                         }
                     } else {
                         if (move_target == moveTarget.in) {
@@ -276,9 +234,53 @@ if (!is_in_move &amp;&amp; move_target == moveTarget.in) {
                         }
                     }
                 }
+                obj_main.is_lvl_sel = false;
+                obj_main.lvl_sel_id = index;
+                with (obj_galaxy) {
+                    if (index != obj_main.lvl_sel_id) {
+                        if (is_in_move) {
+                            if (move_target == moveTarget.out) {
+                                move_back = true;
+                            }
+                        } else {
+                            if (move_target == moveTarget.out) {
+                                is_in_move = true;
+                                move_target = moveTarget.in;
+                            }
+                        }
+                    }
+                }
             }
-            if (!instance_exists(obj_lvl_btn) &amp;&amp; alarm[0] &lt; 0) {
-                alarm[0] = floor(180 / obj_galaxy.move_dir_spd - 180 / obj_main.lvl_btn_dir_spd);
+        } else {
+            var need = true;
+            with (obj_galaxy) {
+                if (is_in_move) {
+                    need = false;
+                    break;
+                }
+            }
+            if (need) {
+                obj_main.is_lvl_sel = true;
+                obj_main.lvl_sel_id = index;
+                lvl_sel_id = index;
+                with (obj_galaxy) {
+                    if (index != obj_main.lvl_sel_id) {
+                        if (is_in_move) {
+                            if (move_target == moveTarget.in) {
+                                move_back = true;
+                            } else {
+                            }
+                        } else {
+                            if (move_target == moveTarget.in) {
+                                is_in_move = true;
+                                move_target = moveTarget.out;
+                            }
+                        }
+                    }
+                }
+                if (!instance_exists(obj_lvl_btn) &amp;&amp; alarm[0] &lt; 0) {
+                    alarm[0] = floor(180 / obj_galaxy.move_dir_spd - 180 / obj_main.lvl_btn_dir_spd);
+                }
             }
         }
     }
