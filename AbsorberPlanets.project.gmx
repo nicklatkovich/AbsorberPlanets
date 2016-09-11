@@ -34,6 +34,9 @@
     <sprite>sprites\spr_planet_base</sprite>
     <sprite>sprites\spr_splash_developer</sprite>
     <sprite>sprites\spr_splash_hexspace</sprite>
+    <sprite>sprites\spr_lightning</sprite>
+    <sprite>sprites\spr_circle</sprite>
+    <sprite>sprites\spr_energy_panel</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -53,6 +56,7 @@
     <object>objects\obj_appsurf</object>
     <object>objects\obj_splash_developer</object>
     <object>objects\obj_splash_hexspace</object>
+    <object>objects\obj_energy_panel</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room_splash_developers</room>

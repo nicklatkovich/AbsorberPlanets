@@ -19,3 +19,5 @@ with (obj_galaxy) {
     image_xscale = sc;
     image_yscale = sc;
 }
+instance_create(0, 0, obj_energy_panel);
+
