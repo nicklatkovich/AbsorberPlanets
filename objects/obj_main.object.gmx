@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>
+is_lvl_sel = false;
 alpha_dir = 0;
 
 is_debug = true;

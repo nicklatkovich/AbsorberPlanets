@@ -26,6 +26,20 @@
           <argument>
             <kind>1</kind>
             <string>
+enum moveTarget {
+    in,
+    out
+}
+
+dist_center = point_distance(0, 0, obj_main.dis_w /2, obj_main.dis_h /2);
+dir_center = point_direction(obj_main.dis_w /2, obj_main.dis_h /2, x, y);
+spr_w = sprite_get_width(spr_galaxy);
+spr_h = sprite_get_height(spr_galaxy);
+is_in_move = false;
+move_dir = 0;
+move_dir_spd = 2;
+move_target = moveTarget.in;
+move_back = false;
 image_angle = random(360);
 angle_max_spd = 0.3;
 angle_spd = random_range(-angle_max_spd, angle_max_spd);
@@ -59,6 +73,23 @@ angle_diff = 5;
           <argument>
             <kind>1</kind>
             <string>
+if (is_in_move) {
+    move_dir += move_dir_spd;
+    if (move_dir &gt;= 180) {
+        move_dir = 0;
+        if (move_back) {
+            move_back = false;
+            if (move_target == moveTarget.in) {
+                move_target = moveTarget.out;
+            } else {
+                move_target = moveTarget.in;
+            }
+        } else {
+            is_in_move = false;
+        }
+    }
+}
+
 angle_spd += random_range(-angle_grav, angle_grav);
 angle_spd = median(-angle_max_spd, angle_spd, angle_max_spd);
 image_angle += angle_spd;
@@ -144,7 +175,43 @@ is_under_mouse = true;
           <argument>
             <kind>1</kind>
             <string>
-// GOTO LevelSelector
+if (!is_in_move &amp;&amp; move_target == moveTarget.in) {
+    if (obj_main.is_lvl_sel) {
+        obj_main.is_lvl_sel = false;
+        var lvl_sel_id = index;
+        with (obj_galaxy) {
+            if (index != lvl_sel_id) {
+                if (is_in_move) {
+                    if (move_target == moveTarget.out) {
+                        move_back = true;
+                    }
+                } else {
+                    if (move_target == moveTarget.out) {
+                        is_in_move = true;
+                        move_target = moveTarget.in;
+                    }
+                }
+            }
+        }
+    } else {
+        obj_main.is_lvl_sel = true;
+        var lvl_sel_id = index;
+        with (obj_galaxy) {
+            if (index != lvl_sel_id) {
+                if (is_in_move) {
+                    if (move_target == moveTarget.in) {
+                        move_back = true;
+                    }
+                } else {
+                    if (move_target == moveTarget.in) {
+                        is_in_move = true;
+                        move_target = moveTarget.out;
+                    }
+                }
+            }
+        }
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -168,7 +235,28 @@ is_under_mouse = true;
           <argument>
             <kind>1</kind>
             <string>
-draw_sprite_ext(spr_galaxy, index, x, y, image_xscale, image_yscale, image_angle + lengthdir_y(angle_diff, lengthdir_x(45, dir)), c_white, 1);
+var dist = point_distance(0, 0, spr_w /2 * image_xscale, spr_h /2 * image_yscale) + dist_center;
+var x_out = obj_main.dis_w /2 + lengthdir_x(dist, dir_center);
+var y_out = obj_main.dis_h /2 + lengthdir_y(dist, dir_center);
+var ldx = (lengthdir_x(1, move_dir) +1) /2;
+
+if (is_in_move) {
+    if (move_target = moveTarget.in) {
+        draw_sprite_ext(spr_galaxy, index,
+            x + ldx * (x_out - x),
+            y + ldx * (y_out - y),
+            image_xscale, image_yscale, image_angle + lengthdir_y(angle_diff, lengthdir_x(45, dir)), c_white, 1);
+    } else {
+        draw_sprite_ext(spr_galaxy, index,
+            x_out - ldx * (x_out - x),
+            y_out - ldx * (y_out - y),
+            image_xscale, image_yscale, image_angle + lengthdir_y(angle_diff, lengthdir_x(45, dir)), c_white, 1);
+    }
+} else if (move_target == moveTarget.in) {
+    draw_sprite_ext(spr_galaxy, index, x, y, image_xscale, image_yscale, image_angle + lengthdir_y(angle_diff, lengthdir_x(45, dir)), c_white, 1);
+} else {
+    draw_sprite_ext(spr_galaxy, index, x_out, y_out, image_xscale, image_yscale, image_angle + lengthdir_y(angle_diff, lengthdir_x(45, dir)), c_white, 1);
+}
 </string>
           </argument>
         </arguments>
