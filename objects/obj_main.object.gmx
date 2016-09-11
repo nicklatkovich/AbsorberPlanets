@@ -141,9 +141,17 @@ if (is_debug) {
     if (keyboard_check_pressed(ord('S')) &amp;&amp; keyboard_check(vk_lcontrol) &amp;&amp; state == states.editor) {
         var file = get_save_filename("AP map|*.apmap", "");
         var file_writer = file_text_open_write(file);
+        file_text_write_string(file_writer, "#size");
+        file_text_writeln(file_writer);
         file_text_write_string(file_writer, string(obj_field.map_w));
         file_text_writeln(file_writer);
         file_text_write_string(file_writer, string(obj_field.map_h));
+        file_text_writeln(file_writer);
+        file_text_write_string(file_writer, "#energy");
+        file_text_writeln(file_writer);
+        file_text_write_string(file_writer, string(0));
+        file_text_writeln(file_writer);
+        file_text_write_string(file_writer, "#field");
         file_text_writeln(file_writer);
         for (var i = 0; i &lt; obj_field.map_h; i++) {
             var str = "";
@@ -185,7 +193,14 @@ if (is_debug) {
             <kind>1</kind>
             <string>
 draw_set_color(c_white);
-//draw_text(0, 0, "FPS = " + fps_r);
+draw_set_font(font_e4_24);
+draw_set_halign(fa_left);
+draw_set_valign(fa_top);
+draw_text(0, 0, "FPS = " + fps_r);
+draw_set_halign(fa_center);
+draw_set_valign(fa_middle);
+
+
 </string>
           </argument>
         </arguments>

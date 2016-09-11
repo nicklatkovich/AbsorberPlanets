@@ -3,7 +3,7 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="3" name="datafiles">
+  <datafiles number="4" name="datafiles">
     <datafile>
       <name>lvl_test.apmap</name>
       <exists>-1</exists>
@@ -24,7 +24,7 @@
     <datafile>
       <name>lvl_1_1.apmap</name>
       <exists>-1</exists>
-      <size>248</size>
+      <size>255</size>
       <exportAction>2</exportAction>
       <exportDir></exportDir>
       <overwrite>0</overwrite>
@@ -74,18 +74,18 @@
     <font>fonts\font_e4_36</font>
   </fonts>
   <objects name="objects">
-    <object>objects\obj_main</object>
-    <object>objects\obj_field</object>
-    <object>objects\obj_planet</object>
-    <object>objects\obj_galaxy</object>
+    <object>objects\obj_apmap</object>
     <object>objects\obj_appsurf</object>
-    <object>objects\obj_splash_developer</object>
-    <object>objects\obj_splash_hexspace</object>
-    <object>objects\obj_energy_panel</object>
-    <object>objects\obj_lvl_btn</object>
     <object>objects\obj_briefing</object>
     <object>objects\obj_briefing_btn_play</object>
-    <object>objects\obj_apmap</object>
+    <object>objects\obj_energy_panel</object>
+    <object>objects\obj_field</object>
+    <object>objects\obj_galaxy</object>
+    <object>objects\obj_lvl_btn</object>
+    <object>objects\obj_main</object>
+    <object>objects\obj_planet</object>
+    <object>objects\obj_splash_developer</object>
+    <object>objects\obj_splash_hexspace</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room_splash_developers</room>
