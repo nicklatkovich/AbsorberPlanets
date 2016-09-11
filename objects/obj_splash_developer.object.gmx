@@ -95,7 +95,7 @@ room_goto(room_splash_hexspace);
             <kind>1</kind>
             <string>
 if (keyboard_check_pressed(vk_anykey)) {
-    dir_spd *= -1;
+    room_goto(room_splash_hexspace);
 }
 dir += dir_spd;;
 if (dir &lt; 0) {
