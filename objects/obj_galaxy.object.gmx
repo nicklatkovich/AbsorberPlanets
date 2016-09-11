@@ -26,6 +26,10 @@
           <argument>
             <kind>1</kind>
             <string>
+image_angle = random(360);
+angle_max_spd = 0.3;
+angle_spd = random_range(-angle_max_spd, angle_max_spd);
+angle_grav = 0.01;
 index = 0;
 dir = 0;
 dir_spd = 10;
@@ -54,6 +58,9 @@ angle_diff = 5;
           <argument>
             <kind>1</kind>
             <string>
+angle_spd += random_range(-angle_grav, angle_grav);
+angle_spd = median(-angle_max_spd, angle_spd, angle_max_spd);
+image_angle += angle_spd;
 if (is_under_mouse) {
     dir += dir_spd;
     dir = dir mod 360;
@@ -160,7 +167,7 @@ is_under_mouse = true;
           <argument>
             <kind>1</kind>
             <string>
-draw_sprite_ext(spr_galaxy, index, x, y, image_xscale, image_yscale, lengthdir_y(angle_diff, dir), c_white, 1);
+draw_sprite_ext(spr_galaxy, index, x, y, image_xscale, image_yscale, image_angle + lengthdir_y(angle_diff, dir), c_white, 1);
 </string>
           </argument>
         </arguments>
