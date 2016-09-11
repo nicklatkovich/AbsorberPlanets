@@ -58,8 +58,8 @@ var yy = spr_h * scale *3/7;
 draw_sprite_ext(spr_energy_panel, 0, 0, 0, scale, scale, 0, c_white, 1);
 //draw_sprite_ext(spr_circle, 0, xx, yy, scale, scale, 0, c_white, 1);
 //draw_sprite_ext(spr_lightning, 0, xx, yy, scale, scale, 0, c_white, 1);
-draw_set_color(c_black);
-draw_set_font(font_e4_24);
+draw_set_color(c_white);
+draw_set_font(font_e4_36);
 draw_text(spr_w * scale *2/3, yy, obj_appsurf.energy);
 
 </string>

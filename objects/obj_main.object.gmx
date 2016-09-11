@@ -123,6 +123,12 @@ if (keyboard_check_pressed(vk_escape)) {
         with (obj_field) {
             instance_destroy();
         }
+        with (obj_planet) {
+            instance_destroy();
+        }
+        with (obj_planet_panel) {
+            instance_destroy();
+        }
         state = states.main;
         create_galaxies();
     } else {

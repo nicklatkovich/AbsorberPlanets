@@ -35,6 +35,7 @@ dir_size_spd = 0.02;
 
 dir_destr = 0;
 dir_destr_spd = 0;
+cell_scale = 0;
 
 </string>
           </argument>
@@ -122,11 +123,15 @@ dir_destr_spd = random_range(2, 6);
           <argument>
             <kind>1</kind>
             <string>
+if (instance_exists(obj_field)) {
+    cell_scale = obj_field.cell_scale;
+}
+
 var t = 1 - (lengthdir_x(1, dir_destr) +1) /2;
 if (dir_destr &gt; 0) {
-    draw_sprite_ext(spr_planet, index, x - t * (x + 64), y - t * (y + 64), obj_field.cell_scale * dir_size, obj_field.cell_scale * dir_size, dir, c_white, 1);
+    draw_sprite_ext(spr_planet, index, x - t * (x + 64), y - t * (y + 64), cell_scale * dir_size, cell_scale * dir_size, dir, c_white, 1);
 } else {
-    draw_sprite_ext(spr_planet, index, x, y, obj_field.cell_scale * dir_size, obj_field.cell_scale * dir_size, dir, c_white, 1);
+    draw_sprite_ext(spr_planet, index, x, y, cell_scale * dir_size, cell_scale * dir_size, dir, c_white, 1);
 }
 
 </string>
