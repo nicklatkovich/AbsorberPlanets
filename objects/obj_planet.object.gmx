@@ -30,6 +30,9 @@ index = irandom(4);
 dir = random(360);
 dir_spd = random_range(-1, 1);
 
+dir_size = 0;
+dir_size_spd = 0.01;
+
 dir_destr = 0;
 dir_destr_spd = 0;
 
@@ -59,6 +62,12 @@ dir_destr_spd = 0;
 dir += dir_spd;
 
 dir_destr += dir_destr_spd;
+
+dir_size += dir_size_spd;
+if (dir_size &gt; 1) {
+    dir_size = 1;
+    dir_size_spd = 0;
+}
 
 if (dir_destr &gt; 180) {
     instance_destroy();
@@ -114,10 +123,11 @@ dir_destr_spd = 4;
             <string>
 var t = 1 - (lengthdir_x(1, dir_destr) +1) /2;
 if (dir_destr &gt; 0) {
-    draw_sprite_ext(spr_planet, index, x - t * (x + 64), y - t * (y + 64), obj_field.cell_scale, obj_field.cell_scale, dir, c_white, 1);
+    draw_sprite_ext(spr_planet, index, x - t * (x + 64), y - t * (y + 64), obj_field.cell_scale * dir_size, obj_field.cell_scale * dir_size, dir, c_white, 1);
 } else {
-    draw_sprite_ext(spr_planet, index, x, y, obj_field.cell_scale, obj_field.cell_scale, dir, c_white, 1);
+    draw_sprite_ext(spr_planet, index, x, y, obj_field.cell_scale * dir_size, obj_field.cell_scale * dir_size, dir, c_white, 1);
 }
+
 </string>
           </argument>
         </arguments>
