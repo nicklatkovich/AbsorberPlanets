@@ -77,8 +77,10 @@ apmap = noone;
 with (child) {
     instance_destroy();
 }
-with (apmap) {
-    instance_destroy();
+if (apmap != noone) {
+    with (apmap) {
+        instance_destroy();
+    }
 }
 </string>
           </argument>

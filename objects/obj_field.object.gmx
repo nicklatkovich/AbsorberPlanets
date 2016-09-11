@@ -26,74 +26,15 @@
           <argument>
             <kind>1</kind>
             <string>
-map_w = 20;
-map_h = 10;
-
-state = 0;
-
-if (obj_main.state == states.loader) {
-    var file_name = get_open_filename("AP map|*.apmap", "");
-    var file = file_text_open_read(file_name);
-    map_w = real(file_text_readln(file));
-    map_h = real(file_text_readln(file));
-    map = ds_grid_create(map_w, map_h);
-    for (var i = 0; i &lt; map_h; i++) {
-        var str = file_text_readln(file);
-        for (var j = 0; j &lt; map_w; j++) {
-            ds_grid_set(map, j, i, ord(string_char_at(str, j + 1)) - ord('0'));
-        }
-    }
-    file_text_close(file);
-} else {
-    map = ds_grid_create(map_w, map_h);
-    for (var i = 0; i &lt; map_h; i++) {
-        for (var j = 0; j &lt; map_w; j++) {
-            ds_grid_set(map, j, i, 0);
-        }
-    }
-}
-
 dis_w = obj_main.dis_w;
 dis_h = obj_main.dis_h;
-abs_w = 0.5 + map_w *1.5;
-abs_h = sqrt(3) /2 * (map_h *2 +1);
-if (dis_w / dis_h &gt; abs_w / abs_h) {
-    cell_size = dis_h / abs_h;
-} else {
-    cell_size = dis_w / abs_w;
-}
-draw_x = (dis_w - cell_size * abs_w) /2;
-draw_y = (dis_h - cell_size * abs_h) /2;
-cell_h = cell_size *sqrt(3);
-cell_half_h = cell_h /2;
-cell_half_size = cell_size /2;
-cell_xstep = cell_size *1.5;
-cell_scale = cell_size /64;
 
 mouse_pos_x = -1;
 mouse_pos_y = -1;
 
 surf_back = surface_create(dis_w, dis_h);
 
-planets = ds_grid_create(map_w, map_h);
-ices = ds_grid_create(map_w, map_h);
 
-for (var i = 0; i &lt; map_w; i++) {
-    for (var j = 0; j &lt; map_h; j++) {
-        ds_grid_set(ices, i, j, 0);
-        if (obj_main.state == states.loader &amp;&amp; ds_grid_get(map, i, j) == 1) {
-            var new_planet = instance_create(
-                1.5 * cell_size * i + draw_x + cell_size,
-                2 * j * cell_half_h + ((i % 2) * cell_half_h) + draw_y + cell_half_h,
-                obj_planet);
-            ds_grid_set(planets, i, j, new_planet);
-        } else {
-            ds_grid_set(planets, i, j, -1);
-        }
-    }
-}
-
-scr_draw_field();
 </string>
           </argument>
         </arguments>
@@ -228,6 +169,71 @@ if (obj_main.state = states.editor) {
         }
     }
 }
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="10">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+state = 0;
+/*
+if (obj_main.state == states.loader) {
+    var file_name = get_open_filename("AP map|*.apmap", "");
+    var file = file_text_open_read(file_name);
+    map_w = real(file_text_readln(file));
+    map_h = real(file_text_readln(file));
+    map = ds_grid_create(map_w, map_h);
+    for (var i = 0; i &lt; map_h; i++) {
+        var str = file_text_readln(file);
+        for (var j = 0; j &lt; map_w; j++) {
+            ds_grid_set(map, j, i, ord(string_char_at(str, j + 1)) - ord('0'));
+        }
+    }
+    file_text_close(file);
+}
+*/
+
+map_w = apmap.map_w;
+map_h = apmap.map_h;
+map = apmap.field;
+
+planets = ds_grid_create(map_w, map_h);
+ices = ds_grid_create(map_w, map_h);
+
+abs_w = 0.5 + map_w *1.5;
+abs_h = sqrt(3) /2 * (map_h *2 +1);
+if (dis_w / dis_h &gt; abs_w / abs_h) {
+    cell_size = dis_h / abs_h;
+} else {
+    cell_size = dis_w / abs_w;
+}
+draw_x = (dis_w - cell_size * abs_w) /2;
+draw_y = (dis_h - cell_size * abs_h) /2;
+cell_h = cell_size *sqrt(3);
+cell_half_h = cell_h /2;
+cell_half_size = cell_size /2;
+cell_xstep = cell_size *1.5;
+cell_scale = cell_size /64;
+
+scr_draw_field();
 
 </string>
           </argument>
