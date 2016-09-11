@@ -234,9 +234,9 @@ if (!is_in_move &amp;&amp; move_target == moveTarget.in) {
                 }
             }
             obj_main.is_lvl_sel = false;
-            var lvl_sel_id = index;
+            obj_main.lvl_sel_id = index;
             with (obj_galaxy) {
-                if (index != lvl_sel_id) {
+                if (index != obj_main.lvl_sel_id) {
                     if (is_in_move) {
                         if (move_target == moveTarget.out) {
                             move_back = true;
@@ -260,9 +260,10 @@ if (!is_in_move &amp;&amp; move_target == moveTarget.in) {
         }
         if (need) {
             obj_main.is_lvl_sel = true;
-            var lvl_sel_id = index;
+            obj_main.lvl_sel_id = index;
+            lvl_sel_id = index;
             with (obj_galaxy) {
-                if (index != lvl_sel_id) {
+                if (index != obj_main.lvl_sel_id) {
                     if (is_in_move) {
                         if (move_target == moveTarget.in) {
                             move_back = true;
