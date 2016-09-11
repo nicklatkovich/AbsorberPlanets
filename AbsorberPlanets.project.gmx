@@ -48,6 +48,7 @@
     <script>scripts\scr_draw_field.gml</script>
     <script>scripts\create_galaxies.gml</script>
     <script>scripts\destroy_galaxies.gml</script>
+    <script>scripts\scr_draw_lvl_btn.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\font_e4_24</font>

@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>
+index = -1;
 is_in_move = true;
 scale = 1;
 color = make_colour_hsv(irandom(255), 255, 255);
@@ -110,20 +111,18 @@ var ldx = (lengthdir_x(1, move_dir) +1) /2;
 
 if (is_in_move) {
     if (move_target = moveTarget.in) {
-        draw_sprite_ext(spr_lvl_btn, 0,
+        scr_draw_lvl_btn(
             x + ldx * (x_out - x),
-            y + ldx * (y_out - y),
-            image_xscale, image_yscale, 0, color, 1);
+            y + ldx * (y_out - y));
     } else {
-        draw_sprite_ext(spr_lvl_btn, 0,
+        scr_draw_lvl_btn(
             x_out - ldx * (x_out - x),
-            y_out - ldx * (y_out - y),
-            image_xscale, image_yscale, 0, color, 1);
+            y_out - ldx * (y_out - y));
     }
 } else if (move_target == moveTarget.in) {
-    draw_sprite_ext(spr_lvl_btn, 0, x, y, image_xscale, image_yscale, 0, color, 1);
+    scr_draw_lvl_btn(x, y);
 } else {
-    draw_sprite_ext(spr_lvl_btn, 0, x_out, y_out, image_xscale, image_yscale, 0, color, 1);
+    scr_draw_lvl_btn(x_out, y_out);
 }
 </string>
           </argument>
