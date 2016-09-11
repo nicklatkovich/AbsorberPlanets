@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>
+obj_main.state = states.lvl_sel;
 index_house = 1;
 index_lvl = 1;
 spr_h = sprite_get_height(spr_briefing_window);

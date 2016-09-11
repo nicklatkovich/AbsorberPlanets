@@ -79,7 +79,7 @@ if (is_in_move) {
             }
         }
     }
-} else {
+} else if (obj_main.state == states.main) {
     if (mouse_check_button_pressed(mb_left)) {
     
         //!!! 32 - radious
