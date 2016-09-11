@@ -156,7 +156,15 @@ if (abs_x &gt;= 0 &amp;&amp; abs_y &gt;= 0) {
                     if (ds_list_size(queue) == 0) {
                         ds_list_add(queue, planet);
                     } else if (ds_list_find_index(queue, planet) == -1) {
-                        ds_list_add(queue, planet);
+                        var pl1 = ds_list_find_value(queue, ds_list_size(queue) - 1);
+                        var t = false;
+                        for (var d = 0; d &lt; 6; d++) {
+                            var xx = pl1.xx + dx(d);
+                            var yy = pl1.yy + dyy(pl1.xx, pl1.yy, d);
+                            if (ds_grid_get(planets, xx, yy) == planet) {
+                                ds_list_add(queue, planet);
+                            }
+                        }
                     }
                 }
             }
