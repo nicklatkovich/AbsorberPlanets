@@ -29,6 +29,10 @@
 index = irandom(4);
 dir = random(360);
 dir_spd = random_range(-1, 1);
+
+dir_destr = 0;
+dir_destr_spd = 0;
+
 </string>
           </argument>
         </arguments>
@@ -53,6 +57,38 @@ dir_spd = random_range(-1, 1);
             <kind>1</kind>
             <string>
 dir += dir_spd;
+
+dir_destr += dir_destr_spd;
+
+if (dir_destr &gt; 180) {
+    dir_destr = 180;
+    dir_destr_spd = 0;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="10">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+dir_destr_spd = 4;
+
 </string>
           </argument>
         </arguments>
@@ -76,8 +112,12 @@ dir += dir_spd;
           <argument>
             <kind>1</kind>
             <string>
-draw_sprite_ext(spr_planet, index, x, y, obj_field.cell_scale, obj_field.cell_scale, dir, c_white, 1);
-
+var t = 1 - (lengthdir_x(1, dir_destr) +1) /2;
+if (dir_destr &gt; 0) {
+    draw_sprite_ext(spr_planet, index, x - t * (x + 64), y - t * (y + 64), obj_field.cell_scale, obj_field.cell_scale, dir, c_white, 1);
+} else {
+    draw_sprite_ext(spr_planet, index, x, y, obj_field.cell_scale, obj_field.cell_scale, dir, c_white, 1);
+}
 </string>
           </argument>
         </arguments>
