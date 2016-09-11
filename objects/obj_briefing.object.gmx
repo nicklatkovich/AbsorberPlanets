@@ -30,24 +30,22 @@ on_close = false;
 obj_main.state = states.brief;
 //index_house = 1;
 //index_lvl = 1;
-spr_w = 256;
-spr_h = 256;
-/*
+
 spr_w = sprite_get_width(spr_briefing_window);
 spr_h = sprite_get_height(spr_briefing_window);
-*/
+
 x = obj_main.dis_w /2;
 y = -sprite_get_height(spr_briefing_window) /2;
-level_label_pos = spr_h /3;
+level_label_pos = spr_h /4;
 dir = 0;
 dir_spd = 4;
 y_to = obj_main.dis_h /2;
 y_diff = (y_to - y) /2;
 y_mean = (y_to + y) /2;
 
-child = instance_create(0, level_label_pos, obj_briefing_btn_play);
+child = instance_create(spr_w /8, level_label_pos - spr_h / 16, obj_briefing_btn_play);
 child.par = id;
-child.x = x;
+child.x = x + spr_w;
 child.y = y + level_label_pos;
 apmap = noone;
 
@@ -164,10 +162,12 @@ if (dir &lt; 180) {
 draw_rectangle(0, 0, obj_main.dis_w, obj_main.dis_h, false);
 draw_set_alpha(1);
 draw_sprite(spr_briefing_window, 0, x, y);
+draw_sprite(spr_sci, 0, x - spr_w /4, y + spr_h /2 - 60);
+draw_set_color(c_white);
 draw_set_font(font_e4_36);
-draw_text(x, y - level_label_pos, "Level   " + string(index_house) + " : " + string(index_lvl));
+draw_text(x + spr_w /8, y - level_label_pos + spr_h /16, "Level   " + string(index_house) + " : " + string(index_lvl));
 if (apmap != noone) {
-    draw_text(x, y, "Energy: " + string(apmap.energy));
+    draw_text(x + spr_w /8, y, "Energy: " + string(apmap.energy));
 }
 
 </string>

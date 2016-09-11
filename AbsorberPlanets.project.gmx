@@ -58,6 +58,7 @@
     <sprite>sprites\spr_planet</sprite>
     <sprite>sprites\spr_planet_base</sprite>
     <sprite>sprites\spr_planet_panel</sprite>
+    <sprite>sprites\spr_sci</sprite>
     <sprite>sprites\spr_splash_developer</sprite>
     <sprite>sprites\spr_splash_hexspace</sprite>
     <sprite>sprites\sprite17</sprite>

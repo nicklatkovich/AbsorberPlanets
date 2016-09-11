@@ -111,6 +111,8 @@ destroy_galaxies();
             <kind>1</kind>
             <string>
 draw_self();
+draw_set_color(make_color_rgb(39, 44, 63));
+draw_text(x, y - 8, "Играть");
 
 </string>
           </argument>
