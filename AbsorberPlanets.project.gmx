@@ -56,6 +56,7 @@
     <sprite>sprites\spr_energy_panel</sprite>
     <sprite>sprites\spr_lvl_btn</sprite>
     <sprite>sprites\spr_briefing_window</sprite>
+    <sprite>sprites\spr_briefing_btn_play</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -83,6 +84,7 @@
     <object>objects\obj_energy_panel</object>
     <object>objects\obj_lvl_btn</object>
     <object>objects\obj_briefing</object>
+    <object>objects\obj_briefing_btn_play</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room_splash_developers</room>
