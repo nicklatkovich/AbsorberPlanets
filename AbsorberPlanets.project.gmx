@@ -49,7 +49,7 @@
     <object>objects\obj_main</object>
     <object>objects\obj_field</object>
     <object>objects\obj_planet</object>
-    <object>objects\obj_galaxy1</object>
+    <object>objects\obj_galaxy</object>
     <object>objects\obj_appsurf</object>
     <object>objects\obj_splash_developer</object>
     <object>objects\obj_splash_hexspace</object>

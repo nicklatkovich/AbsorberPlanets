@@ -1,4 +1,4 @@
 
-with (obj_galaxy1) {
-    //instance_destroy();
+with (obj_galaxy) {
+    instance_destroy();
 }

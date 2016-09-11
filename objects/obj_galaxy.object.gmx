@@ -26,8 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>
-image_xscale = obj_main.galaxies_scale;
-image_yscale = obj_main.galaxies_scale;
+index = 0;
 dir = 0;
 dir_spd = 10;
 is_under_mouse = false;
@@ -161,7 +160,7 @@ is_under_mouse = true;
           <argument>
             <kind>1</kind>
             <string>
-draw_sprite_ext(spr_galaxy, 0, x, y, image_xscale, image_yscale, lengthdir_y(angle_diff, dir), c_white, 1);
+draw_sprite_ext(spr_galaxy, index, x, y, image_xscale, image_yscale, lengthdir_y(angle_diff, dir), c_white, 1);
 </string>
           </argument>
         </arguments>
