@@ -36,6 +36,7 @@ is_debug = true;
 enum states {
     main,
     lvl_sel,
+    brief,
     editor,
     loader,
     play

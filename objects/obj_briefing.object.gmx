@@ -26,12 +26,18 @@
           <argument>
             <kind>1</kind>
             <string>
-obj_main.state = states.lvl_sel;
+on_close = false;
+obj_main.state = states.brief;
 index_house = 1;
 index_lvl = 1;
+spr_w = 256;
+spr_h = 256;
+/*
+spr_w = sprite_get_width(spr_briefing_window);
 spr_h = sprite_get_height(spr_briefing_window);
+*/
 x = obj_main.dis_w /2;
-y = -spr_h /2;
+y = -sprite_get_height(spr_briefing_window) /2;
 level_label_pos = -spr_h /4;
 dir = 0;
 dir_spd = 4;
@@ -63,12 +69,24 @@ y_mean = (y_to + y) /2;
             <kind>1</kind>
             <string>
 dir += dir_spd;
-if (dir &lt; 180) {
-    y = y_mean - lengthdir_x(y_diff, dir);
-} else {
+if (dir &gt;= 180) {
+    dir = 180;
     y = y_to;
+} else if (dir &lt; 0) {
+    instance_destroy();
 }
+y = y_mean - lengthdir_x(y_diff, dir);
 
+if (mouse_check_button_pressed(mb_left)) {
+    
+    // TODO: Fix many clickes
+    
+    if (on_close == false &amp;&amp; obj_main.state == states.brief &amp;&amp; abs(mouse_x - x) &gt; spr_w /2 || abs(mouse_y - y) &gt; spr_h /2) {
+        dir_spd = -dir_spd;
+        obj_main.state = states.main;
+        on_close = true;
+    }
+}
 </string>
           </argument>
         </arguments>
