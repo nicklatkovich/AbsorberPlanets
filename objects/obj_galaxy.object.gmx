@@ -29,7 +29,8 @@
 image_angle = random(360);
 angle_max_spd = 0.3;
 angle_spd = random_range(-angle_max_spd, angle_max_spd);
-angle_grav = 0.01;
+angle_std_grav = 0.01;
+angle_grav = angle_std_grav;
 index = 0;
 dir = 0;
 dir_spd = 10;
@@ -167,7 +168,7 @@ is_under_mouse = true;
           <argument>
             <kind>1</kind>
             <string>
-draw_sprite_ext(spr_galaxy, index, x, y, image_xscale, image_yscale, image_angle + lengthdir_y(angle_diff, dir), c_white, 1);
+draw_sprite_ext(spr_galaxy, index, x, y, image_xscale, image_yscale, image_angle + lengthdir_y(angle_diff, lengthdir_x(90, dir)), c_white, 1);
 </string>
           </argument>
         </arguments>
