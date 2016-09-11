@@ -37,6 +37,7 @@ map_w = 20;
 map_h = 10;
 
 queue = ds_list_create();
+instance_create(0, 0, obj_planet_panel);
 
 </string>
           </argument>

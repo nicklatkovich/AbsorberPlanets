@@ -31,7 +31,7 @@ dir = random(360);
 dir_spd = random_range(-1, 1);
 
 dir_size = 0;
-dir_size_spd = 0.01;
+dir_size_spd = 0.02;
 
 dir_destr = 0;
 dir_destr_spd = 0;
@@ -70,6 +70,7 @@ if (dir_size &gt; 1) {
 }
 
 if (dir_destr &gt; 180) {
+    obj_planet_panel.sc++;
     instance_destroy();
 }
 
@@ -96,7 +97,7 @@ if (dir_destr &gt; 180) {
           <argument>
             <kind>1</kind>
             <string>
-dir_destr_spd = 4;
+dir_destr_spd = random_range(2, 6);
 
 </string>
           </argument>

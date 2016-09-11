@@ -42,22 +42,25 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
+    <sprite>sprites\spr_briefing_btn_play</sprite>
+    <sprite>sprites\spr_briefing_window</sprite>
     <sprite>sprites\spr_cell</sprite>
     <sprite>sprites\spr_cell_base</sprite>
+    <sprite>sprites\spr_circle</sprite>
     <sprite>sprites\spr_destr_ice</sprite>
+    <sprite>sprites\spr_energy_panel</sprite>
+    <sprite>sprites\spr_energy_panel_old</sprite>
     <sprite>sprites\spr_galaxy</sprite>
+    <sprite>sprites\spr_galaxy_new</sprite>
     <sprite>sprites\spr_ice</sprite>
+    <sprite>sprites\spr_lightning</sprite>
+    <sprite>sprites\spr_lvl_btn</sprite>
     <sprite>sprites\spr_planet</sprite>
     <sprite>sprites\spr_planet_base</sprite>
+    <sprite>sprites\spr_planet_panel</sprite>
     <sprite>sprites\spr_splash_developer</sprite>
     <sprite>sprites\spr_splash_hexspace</sprite>
-    <sprite>sprites\spr_lightning</sprite>
-    <sprite>sprites\spr_circle</sprite>
-    <sprite>sprites\spr_energy_panel</sprite>
-    <sprite>sprites\spr_lvl_btn</sprite>
-    <sprite>sprites\spr_briefing_window</sprite>
-    <sprite>sprites\spr_briefing_btn_play</sprite>
-    <sprite>sprites\spr_galaxy_new</sprite>
+    <sprite>sprites\sprite17</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -89,6 +92,7 @@
     <object>objects\obj_planet</object>
     <object>objects\obj_splash_developer</object>
     <object>objects\obj_splash_hexspace</object>
+    <object>objects\obj_planet_panel</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room_splash_developers</room>

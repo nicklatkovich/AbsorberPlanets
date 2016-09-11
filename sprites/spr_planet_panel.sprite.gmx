@@ -20,6 +20,6 @@
   <width>512</width>
   <height>256</height>
   <frames>
-    <frame index="0">images\spr_energy_panel_0.png</frame>
+    <frame index="0">images\spr_planet_panel_0.png</frame>
   </frames>
 </sprite>
