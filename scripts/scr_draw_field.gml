@@ -8,6 +8,8 @@ for (var i = 0; i < map_w; i++) {
         if (ds_grid_get(map, i, j) == 1) {
             var new_planet = instance_create(xx, yy, obj_planet);
             ds_grid_set(planets, i, j, new_planet);
+            new_planet.xx = i;
+            new_planet.yy = j;
             draw_sprite_ext(spr_cell, 0, xx, yy, cell_scale, cell_scale, 0, c_white, 1);
             if (ds_grid_get(ices, i, j) > 0) {
                 draw_sprite_ext(spr_ice, 0, xx, yy, cell_scale, cell_scale, 0, c_white, 1);

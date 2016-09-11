@@ -61,9 +61,9 @@ dir += dir_spd;
 dir_destr += dir_destr_spd;
 
 if (dir_destr &gt; 180) {
-    dir_destr = 180;
-    dir_destr_spd = 0;
+    instance_destroy();
 }
+
 </string>
           </argument>
         </arguments>
