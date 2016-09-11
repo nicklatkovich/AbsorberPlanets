@@ -28,8 +28,8 @@
             <string>
 on_close = false;
 obj_main.state = states.brief;
-index_house = 1;
-index_lvl = 1;
+//index_house = 1;
+//index_lvl = 1;
 spr_w = 256;
 spr_h = 256;
 /*
@@ -49,7 +49,7 @@ child = instance_create(0, level_label_pos, obj_briefing_btn_play);
 child.par = id;
 child.x = x;
 child.y = y + level_label_pos;
-
+apmap = noone;
 
 </string>
           </argument>
@@ -77,6 +77,9 @@ child.y = y + level_label_pos;
 with (child) {
     instance_destroy();
 }
+with (apmap) {
+    instance_destroy();
+}
 </string>
           </argument>
         </arguments>
@@ -100,6 +103,14 @@ with (child) {
           <argument>
             <kind>1</kind>
             <string>
+if (apmap == noone) {
+    apmap = instance_create(0, 0, obj_apmap);
+    apmap.filename = "lvl_" + string(index_house) + "_" + string(index_lvl) + ".apmap";
+    with (apmap) {
+        event_user(0);
+    }
+}
+
 dir += dir_spd;
 if (dir &gt;= 180) {
     dir = 180;
@@ -152,7 +163,10 @@ draw_rectangle(0, 0, obj_main.dis_w, obj_main.dis_h, false);
 draw_set_alpha(1);
 draw_sprite(spr_briefing_window, 0, x, y);
 draw_set_font(font_e4_36);
-draw_text(x, y - level_label_pos, "Level   " + string(index_house + 1) + " : " + string(index_lvl));
+draw_text(x, y - level_label_pos, "Level   " + string(index_house) + " : " + string(index_lvl));
+if (apmap != noone) {
+    draw_text(x, y, "Energy: " + string(apmap.energy));
+}
 
 </string>
           </argument>

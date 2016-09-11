@@ -85,6 +85,7 @@
     <object>objects\obj_lvl_btn</object>
     <object>objects\obj_briefing</object>
     <object>objects\obj_briefing_btn_play</object>
+    <object>objects\obj_apmap</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room_splash_developers</room>

@@ -86,7 +86,7 @@ if (is_in_move) {
         if (point_distance(x, y, mouse_x, mouse_y) &lt; 32) {
             var ind = index;
             with (instance_create(0, 0, obj_briefing)) {
-                index_house = obj_main.lvl_sel_id;
+                index_house = obj_main.lvl_sel_id + 1;
                 index_lvl = ind;
             }
         }
