@@ -168,7 +168,7 @@ is_under_mouse = true;
           <argument>
             <kind>1</kind>
             <string>
-draw_sprite_ext(spr_galaxy, index, x, y, image_xscale, image_yscale, image_angle + lengthdir_y(angle_diff, lengthdir_x(90, dir)), c_white, 1);
+draw_sprite_ext(spr_galaxy, index, x, y, image_xscale, image_yscale, image_angle + lengthdir_y(angle_diff, lengthdir_x(45, dir)), c_white, 1);
 </string>
           </argument>
         </arguments>
