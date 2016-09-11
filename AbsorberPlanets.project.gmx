@@ -48,6 +48,9 @@
     <script>scripts\create_galaxies.gml</script>
     <script>scripts\destroy_galaxies.gml</script>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\font_e4_24</font>
+  </fonts>
   <objects name="objects">
     <object>objects\obj_main</object>
     <object>objects\obj_field</object>
