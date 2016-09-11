@@ -31,13 +31,14 @@ enum moveTarget {
     out
 }
 
+lvl_num = 15;
 dist_center = point_distance(0, 0, obj_main.dis_w /2, obj_main.dis_h /2);
 dir_center = point_direction(obj_main.dis_w /2, obj_main.dis_h /2, x, y);
 spr_w = sprite_get_width(spr_galaxy);
 spr_h = sprite_get_height(spr_galaxy);
 is_in_move = false;
 move_dir = 0;
-move_dir_spd = 2;
+move_dir_spd = 2.5;
 move_target = moveTarget.in;
 move_back = false;
 image_angle = random(360);
@@ -50,6 +51,31 @@ dir = 0;
 dir_spd = 10;
 is_under_mouse = false;
 angle_diff = 5;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>for (var i = 0; i &lt; lvl_num; i++) {
+    instance_create(random(obj_main.dis_w), random(obj_main.dis_h), obj_lvl_btn);
+}
 </string>
           </argument>
         </arguments>
@@ -177,27 +203,15 @@ is_under_mouse = true;
             <string>
 if (!is_in_move &amp;&amp; move_target == moveTarget.in) {
     if (obj_main.is_lvl_sel) {
-        obj_main.is_lvl_sel = false;
-        var lvl_sel_id = index;
+        var need = true;
         with (obj_galaxy) {
-            if (index != lvl_sel_id) {
-                if (is_in_move) {
-                    if (move_target == moveTarget.out) {
-                        move_back = true;
-                    }
-                } else {
-                    if (move_target == moveTarget.out) {
-                        is_in_move = true;
-                        move_target = moveTarget.in;
-                    }
-                }
+            if (is_in_move) {
+                need = false;
+                break;
             }
         }
-    } else {
-        obj_main.is_lvl_sel = true;
-        var lvl_sel_id = index;
-        with (obj_galaxy) {
-            if (index != lvl_sel_id) {
+        if (need) {
+            with (obj_lvl_btn) {
                 if (is_in_move) {
                     if (move_target == moveTarget.in) {
                         move_back = true;
@@ -208,6 +222,52 @@ if (!is_in_move &amp;&amp; move_target == moveTarget.in) {
                         move_target = moveTarget.out;
                     }
                 }
+            }
+            obj_main.is_lvl_sel = false;
+            var lvl_sel_id = index;
+            with (obj_galaxy) {
+                if (index != lvl_sel_id) {
+                    if (is_in_move) {
+                        if (move_target == moveTarget.out) {
+                            move_back = true;
+                        }
+                    } else {
+                        if (move_target == moveTarget.out) {
+                            is_in_move = true;
+                            move_target = moveTarget.in;
+                        }
+                    }
+                }
+            }
+        }
+    } else {
+        var need = true;
+        with (obj_galaxy) {
+            if (is_in_move) {
+                need = false;
+                break;
+            }
+        }
+        if (need) {
+            obj_main.is_lvl_sel = true;
+            var lvl_sel_id = index;
+            with (obj_galaxy) {
+                if (index != lvl_sel_id) {
+                    if (is_in_move) {
+                        if (move_target == moveTarget.in) {
+                            move_back = true;
+                        } else {
+                        }
+                    } else {
+                        if (move_target == moveTarget.in) {
+                            is_in_move = true;
+                            move_target = moveTarget.out;
+                        }
+                    }
+                }
+            }
+            if (!instance_exists(obj_lvl_btn) &amp;&amp; alarm[0] &lt; 0) {
+                alarm[0] = floor(180 / obj_galaxy.move_dir_spd - 180 / obj_main.lvl_btn_dir_spd);
             }
         }
     }

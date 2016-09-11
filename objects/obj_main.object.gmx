@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>
+lvl_btn_dir_spd = 4;
 is_lvl_sel = false;
 alpha_dir = 0;
 

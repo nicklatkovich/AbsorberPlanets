@@ -37,6 +37,7 @@
     <sprite>sprites\spr_lightning</sprite>
     <sprite>sprites\spr_circle</sprite>
     <sprite>sprites\spr_energy_panel</sprite>
+    <sprite>sprites\spr_lvl_btn</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -60,6 +61,7 @@
     <object>objects\obj_splash_developer</object>
     <object>objects\obj_splash_hexspace</object>
     <object>objects\obj_energy_panel</object>
+    <object>objects\obj_lvl_btn</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room_splash_developers</room>
