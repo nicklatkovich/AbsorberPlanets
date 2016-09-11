@@ -27,6 +27,8 @@
             <kind>1</kind>
             <string>
 energy = 0;
+draw_set_halign(fa_center);
+draw_set_valign(fa_middle);
 randomize();
 dis_w = display_get_width();
 dis_h = display_get_height();

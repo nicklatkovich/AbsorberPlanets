@@ -60,7 +60,7 @@ draw_sprite_ext(spr_circle, 0, xx, yy, scale, scale, 0, c_white, 1);
 draw_sprite_ext(spr_lightning, 0, xx, yy, scale, scale, 0, c_white, 1);
 draw_set_color(c_black);
 draw_set_font(font_e4_24);
-draw_text(spr_w * scale *2/3, yy, obj_appsurf.energy);
+draw_text(spr_w * scale *5/9, yy, obj_appsurf.energy);
 
 </string>
           </argument>
