@@ -57,6 +57,7 @@
     <sprite>sprites\spr_lvl_btn</sprite>
     <sprite>sprites\spr_briefing_window</sprite>
     <sprite>sprites\spr_briefing_btn_play</sprite>
+    <sprite>sprites\spr_galaxy_new</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
