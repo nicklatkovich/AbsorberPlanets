@@ -30,12 +30,15 @@ energy = 150;
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
 randomize();
-//dis_w = display_get_width();
-//dis_h = display_get_height();
-dis_w = room_width;
-dis_h = room_height;
-//surface_resize(application_surface, dis_w, dis_h);
-show_message_async(string(dis_w) + ":" + string(dis_h));
+if (window_get_fullscreen()) {
+    dis_w = display_get_width();
+    dis_h = display_get_height();
+} else {
+    dis_w = 960;
+    dis_h = 540;
+    window_set_size(dis_w, dis_h);
+}
+surface_resize(application_surface, dis_w, dis_h);
 application_surface_draw_enable(false);
 alpha = 0;
 </string>

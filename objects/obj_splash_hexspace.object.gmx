@@ -70,7 +70,7 @@ dir_spd = 1;
           <argument>
             <kind>1</kind>
             <string>
-//room_goto(room_game);
+room_goto(room_game);
 </string>
           </argument>
         </arguments>

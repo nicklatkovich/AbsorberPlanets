@@ -70,7 +70,7 @@ dir_spd = 1;
           <argument>
             <kind>1</kind>
             <string>
-//room_goto(room_splash_hexspace);
+room_goto(room_splash_hexspace);
 </string>
           </argument>
         </arguments>
