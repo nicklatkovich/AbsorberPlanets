@@ -74,8 +74,8 @@ angle_diff = 5;
           <argument>
             <kind>1</kind>
             <string>
-// !!! 32 -- radious of level_button
-var dist = -32 / lengthdir_y(1, 90 / lvl_num);
+var dist = obj_main.dis_h /4;
+var btn_size = dist * lengthdir_y(1, 90/ lvl_num);
 
 for (var i = 0; i &lt; lvl_num; i++) {
     var dir = dir_center + 270 - 180 * ((i + 0.5) / lvl_num);
@@ -83,6 +83,7 @@ for (var i = 0; i &lt; lvl_num; i++) {
         obj_main.dis_w /2 + lengthdir_x(dist, dir),
         obj_main.dis_h /2 + lengthdir_y(dist, dir),
         obj_lvl_btn)) {
+        size = btn_size;
         index = i + 1;
     }
 }

@@ -121,6 +121,9 @@ var x_out = obj_main.dis_w /2 + lengthdir_x(dist, dir_center);
 var y_out = obj_main.dis_h /2 + lengthdir_y(dist, dir_center);
 var ldx = (lengthdir_x(1, move_dir) +1) /2;
 
+image_xscale = size /32;
+image_yscale = size /32;
+
 if (is_in_move) {
     if (move_target = moveTarget.in) {
         scr_draw_lvl_btn(
