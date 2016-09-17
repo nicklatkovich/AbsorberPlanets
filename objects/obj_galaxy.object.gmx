@@ -74,7 +74,7 @@ angle_diff = 5;
           <argument>
             <kind>1</kind>
             <string>
-var dist = obj_main.dis_h /4;
+var dist = obj_main.dis_h *3/8;
 var btn_size = dist * lengthdir_y(1, 90/ lvl_num);
 
 for (var i = 0; i &lt; lvl_num; i++) {
