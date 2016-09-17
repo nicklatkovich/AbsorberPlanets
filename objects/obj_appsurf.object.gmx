@@ -30,9 +30,12 @@ energy = 150;
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
 randomize();
-dis_w = display_get_width();
-dis_h = display_get_height();
-surface_resize(application_surface, dis_w, dis_h);
+//dis_w = display_get_width();
+//dis_h = display_get_height();
+dis_w = room_width;
+dis_h = room_height;
+//surface_resize(application_surface, dis_w, dis_h);
+show_message_async(string(dis_w) + ":" + string(dis_h));
 application_surface_draw_enable(false);
 alpha = 0;
 </string>
